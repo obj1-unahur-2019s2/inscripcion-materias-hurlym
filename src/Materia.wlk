@@ -23,6 +23,11 @@ class Materia {
 		materiasCorrelativas.add(materia)
 	}
 	
+	method correlativasNecesarias()
+	{
+		return materiasCorrelativas
+	}
+	
 	/* 
 	 * method jornadaLaboral(){
 		if(self.obrerosDisponibles().size() == 0 ){

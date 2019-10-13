@@ -18,4 +18,8 @@ class Cursada {
 		return _nota
 	}
 	
+	method getMateria(){
+		return _materia
+	}
+	
 }

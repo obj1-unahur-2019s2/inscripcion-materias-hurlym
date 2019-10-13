@@ -23,9 +23,50 @@ class Estudiantes {
 		carrerasInscriptas.add(carrera)
 	}
 	
+	method estaAprobada(mate){
+		
+		//NO SE CUAL DE LAS DOS CONSULTAS ES CORRECTA
+		return (cursadas.forEach({cursada=>cursada.getNombre()}==mate.getNombre()))
+		
+		//CONSULTO SI ESTA EN LA LISTA LA MATERIA APROBADA
+		//return (cursadas.contains(mate))
+		
+		
+		
+			
+		
+	}
+	
 	method inscribirMateria(materia){
-		if(materia)
-		materiasInscriptas.add(materia)
+		//VER COMO SE SABE SI LA MATERIA QUE SE DESEA AGREGAR PERTENECE A LA CARRERA A LA QUE
+		//ESTA INSCRIPTO
+		
+		//NO SE SI ES CORRECTO
+		//RECORRO LA LISTA DE CARRERAS A LAS QUE ESTA INSCRIPTO EL ALUMNO
+		//Y A CADA CARRERA LE ENVIO LA MATERIA A LA QUE SE DESEA INSCRIBIR
+		//SI LA MATERIA PERTENECE A LA CARRERA ME DEVOLVERA TRUE Y AGREGO LA MATERIA 
+		//A LAS INSCRIPCIONES DEL ALUMNO
+		if(carrerasInscriptas.forEach({carrera=>carrera.perteneceMateria(materia)}))
+		{
+			//CONSULTO SINO LA TIENE APROBADA
+			if((cursadas.forEach({cursada=>cursada.getNombre()}==materia.getNombre())))
+			{
+				//CONSULTO SI YA NO ESTA INSCRIPTO EN ESA MATERIA
+				if(!materiasInscriptas.contains(materia))
+				{
+					
+					if(materia.correlativasNecesarias().forEach({}))
+					{
+						
+					}
+				}
+			}
+			//NO SE SI ES CORRECTA LA SINTAXIS
+			//LO QUE DESEO ES RECORRER TODAS LAS MATERIAS CURSADAS Y VER 
+			if(!cursadas.forEach({cursada=>cursada.getNombre()}==materia.getNombre()))
+			materiasInscriptas.add(materia)
+		}
+		
 	}
 	
 	method aprobarMateria(mate,  nota){
@@ -47,13 +88,7 @@ class Estudiantes {
 		
 	}
 	
-	method estaAprobada(mate){
-		//CONSULTO SI ESTA EN LA LISTA LA MATERIA APROBADA
-		return(cursadas.contains(mate))
-		
-			
-		
-	}
+	
 	
 	method cantAprobadas(){
 		//CONSULTO LA CANTIDAD DE MATERIAS APROBADAS
