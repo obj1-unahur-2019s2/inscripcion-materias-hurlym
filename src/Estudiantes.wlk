@@ -62,6 +62,17 @@ class Estudiantes {
 		
 	}
 	
+	method saberPromedio(){
+		//COMO RECORRO LA LISTA PARA SABER EN CADA MATERIA Y LEER LA POSICIOND DE LA NOTA
+		var suma
+		//RECORRO TODA LA LISTA Y SUMO LA NOTA DE CADA UNA 
+		cursadas.forEach(suma = suma + {cursada=>cursada.getNota()})
+		//A LA SUMA OBTENIDA LA DIVIDO POR LA CANTIDAD DE NOTAS Y DEVUELVO EL RESULTADO OBTENIDO
+		return suma / cursadas.count()
+			
+		
+	}
+	
 	
 	
 	

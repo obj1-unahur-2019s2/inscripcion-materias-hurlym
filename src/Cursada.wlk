@@ -14,4 +14,8 @@ class Cursada {
 		_nota = nota
 	}
 	
+	method getNota(){
+		return _nota
+	}
+	
 }
