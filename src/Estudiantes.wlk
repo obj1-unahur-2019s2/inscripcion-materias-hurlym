@@ -47,5 +47,22 @@ class Estudiantes {
 		
 	}
 	
+	method estaAprobada(mate){
+		//CONSULTO SI ESTA EN LA LISTA LA MATERIA APROBADA
+		return(cursadas.contains(mate))
+		
+			
+		
+	}
+	
+	method cantAprobadas(){
+		//CONSULTO LA CANTIDAD DE MATERIAS APROBADAS
+		return(cursadas.count())
+			
+		
+	}
+	
+	
+	
 	
 }
