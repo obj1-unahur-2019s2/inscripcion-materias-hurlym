@@ -1,0 +1,80 @@
+import Universidad.*
+import Carrera.*
+import Materia.*
+import Cursada.*
+import Estudiantes.*
+
+
+
+describe "Test Inscripcion"{
+	
+	
+		
+	
+	const programacion = new Carrera()
+	const medicina = new Carrera()
+	const derecho = new Carrera()
+	
+	const elementosDeProgramacion = new Materia(nombre = "Elementos De Programacion", credito = 0 )
+	
+	
+	const matematicaI = new Materia(nombre = "Matematica I", credito = 0)
+	const objetosI = new Materia(nombre = "Objetos I", credito = 0)
+	const objetosII = new Materia(nombre = "Objetos II", credito = 0)
+	const objetosIII = new Materia(nombre = "Objetos III", credito = 0)
+	const trabajoFinal = new Materia(nombre = "Trabajo Final", credito = 0)
+	const basesDeDatos = new Materia(nombre = "Base de datos", credito = 0)
+	const quimica = new Materia(nombre = "Quimica", credito = 0)
+	const biologiaI = new Materia(nombre = "Biologia I", credito = 0)
+	const biologiaII = new Materia(nombre = "Biologia II", credito = 0)
+	const anatomiaGeneral = new Materia(nombre = "Anatomia General", credito = 0)
+	const latin = new Materia(nombre = "Latin", credito = 0)
+	const derechoRomano = new Materia(nombre = "Derecho Romano", credito = 0)
+	const historiadelDerechoArgentino = new Materia(nombre = "Historia del Derecho Argentino", credito = 0)
+	const derechoPenalI = new Materia(nombre = "Derecho Penal I", credito = 0)
+	const derechoPenalII = new Materia(nombre = "Derecho Penal II", credito = 0)
+	const roque = new Estudiantes()
+	
+	fixture{
+		
+	programacion.agregarMateria(elementosDeProgramacion);
+	programacion.agregarMateria(matematicaI);
+	programacion.agregarMateria(objetosI);
+	programacion.agregarMateria(objetosII);
+	programacion.agregarMateria(objetosIII);
+	programacion.agregarMateria(trabajoFinal);
+	programacion.agregarMateria(basesDeDatos);
+	
+	medicina.agregarMateria(quimica);
+	medicina.agregarMateria(biologiaI);
+	medicina.agregarMateria(biologiaII);
+	medicina.agregarMateria(anatomiaGeneral);
+	
+	derecho.agregarMateria(latin);
+	derecho.agregarMateria(derechoRomano);
+	derecho.agregarMateria(historiadelDerechoArgentino);
+	derecho.agregarMateria(derechoPenalI);
+	derecho.agregarMateria(derechoPenalII);
+	
+	roque.inscribirCarrera(programacion);
+	roque.inscribirCarrera(medicina);
+	
+	roque.aprobarMateria(elementosDeProgramacion, 10)
+	
+	
+	}
+	
+	
+	
+	test "Test Inscripcion"{
+	
+	
+	
+	
+	
+	}
+	
+}
+
+
+
