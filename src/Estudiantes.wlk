@@ -28,12 +28,24 @@ class Estudiantes {
 		materiasInscriptas.add(materia)
 	}
 	
-	method aprobarMateria(materia,  nota){
+	method aprobarMateria(mate,  nota){
+		//CONSULTO SI ESTA EN LA LISTA LA MATERIA QUE DESEO AGREGAR A LA LISTA DE APROBADAS
+		if(cursadas.contains(mate))
+		{
+			//ACA DEBERIA IR EL MENSAJE DE ERROR
+			
+		}
+		else
+		{
+			cursa.setMateria(mate)
+			cursa.setNota(nota)
+			cursadas.add(cursa)
+		}
 		
-		cursa.setMateria(materia)
-		cursa.setNota(nota)
-		cursadas.add(cursa)
+		
 		
 		
 	}
+	
+	
 }
