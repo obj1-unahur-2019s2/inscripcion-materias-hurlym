@@ -1,7 +1,13 @@
+import Estudiantes.*
+
 class Materia {
 	var property nombre = "";
 	var property credito = 0;
 	const materiasCorrelativas = []
+	
+	var property cupo = 30;
+	const listaEsperaAlumnos = []
+	
 	
 	method setNombre(nomb){
 		nombre = nomb
@@ -26,6 +32,26 @@ class Materia {
 	method correlativasNecesarias()
 	{
 		return materiasCorrelativas
+	}
+	
+	method getCupo()
+	{
+		return cupo
+		
+	}
+	
+	method descontarCupo()
+	{
+		cupo--
+	}
+	
+	method agregarListaEspera(estudiante){
+		listaEsperaAlumnos.add(estudiante)
+	}
+	
+	method verListaDeEspera()
+	{
+		return listaEsperaAlumnos
 	}
 	
 	/* 

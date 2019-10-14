@@ -26,7 +26,7 @@ class Estudiantes {
 	method estaAprobada(mate){
 		
 		//NO SE CUAL DE LAS DOS CONSULTAS ES CORRECTA
-		return (cursadas.forEach({cursada=>cursada.getNombre()}==mate.getNombre()))
+		return cursadas.any({cursada=>cursada.getMateria()== mate})
 		
 		//CONSULTO SI ESTA EN LA LISTA LA MATERIA APROBADA
 		//return (cursadas.contains(mate))
@@ -46,15 +46,54 @@ class Estudiantes {
 		//Y A CADA CARRERA LE ENVIO LA MATERIA A LA QUE SE DESEA INSCRIBIR
 		//SI LA MATERIA PERTENECE A LA CARRERA ME DEVOLVERA TRUE Y AGREGO LA MATERIA 
 		//A LAS INSCRIPCIONES DEL ALUMNO
-		return((self.existeMateriaEnCarrera(materia)) && (self.estaAprobada(materia))&&(!self.estaAnotado(materia)))
+		return((self.existeMateriaEnCarrera(materia)) 
+			&& (not self.estaAprobada(materia))
+			&&(not self.estaAnotado(materia)) 
+			&& (self.tengoLasCorrelativas(materia))
+		)
 			
 		
 		
 	}
 	
+	//CONSULTO LAS MATERIAS CORRELATIVAS DE LA MATERIA
+	//Y BUSCO EN ESA LISTA QUE SE ENCUENTREN TODAS LAS MATERIAS EN LA LISTA DE CURSADAS
+	method tengoLasCorrelativas(mate){
+		return mate.correlativasNecesarias().all({materia=>cursadas.contains(materia)})
+	}
+	
+	//CONSULTO SI ALGUNA SI SE ENCUENTRA LA MATERIA EN ALGUNA DE LAS CARRERAS A LAS QUE ESTA
+	//ANOTADO
 	method existeMateriaEnCarrera(materia)
 	{
-		return ((carrerasInscriptas.forEach({carrera=>carrera.perteneceMateria(materia)})))
+		return carrerasInscriptas.any({carrera=>carrera.perteneceMateria(materia)})
+	}
+	
+	//DAR DE BAJA ESTUDIANTE
+	method darDeBaja(materia)
+	{
+		//ELIMINO LA MATERIA DE LA LISTA DE MATERIAS INSCRIPTAS
+		materiasInscriptas.remove(materia)
+		//CONSULTO SI HAY LISTA DE ESPERA
+		if(materia.verListaDeEspera().size()>0){
+			//SI HAY LISTA DE ESPERA BUSCO EL PRIMER ALUMNO DE LA LISTA Y LE AGREGO LA MATRIA A 
+			//SU LISTA DE MATERIAS INSCRIPTAS
+			//PERO COMO SE HACE
+			materia.verListaDeEspera().get(0).agregarMateria(materia)
+		}
+	}
+	
+	//AGREGO LA MATERIA A MATERIAS INSCRIPTAS
+	method agregarMateria(materia)
+	{
+		if(self.inscribirMateria(materia))
+		{
+			materiasInscriptas.add(materia)
+		}
+		else
+		{
+			self.error("No se puede inscribir en la materia")
+		}
 	}
 	
 	method aprobarMateria(mate,  nota){

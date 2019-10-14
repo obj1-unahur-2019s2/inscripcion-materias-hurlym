@@ -13,8 +13,7 @@ class Carrera {
 	
 	method perteneceMateria(materia){
 		
-		return materias.contains(
-			{mate => materias == materia })
+		return materias.contains(materia)
 		
 	}
 	
