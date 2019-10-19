@@ -18,22 +18,27 @@ describe "Test Inscripcion"{
 	const elementosDeProgramacion = new Materia(nombre = "Elementos De Programacion", credito = 0 )
 	
 	
-	const matematicaI = new Materia(nombre = "Matematica I", credito = 0)
-	const objetosI = new Materia(nombre = "Objetos I", credito = 0)
-	const objetosII = new Materia(nombre = "Objetos II", credito = 0)
-	const objetosIII = new Materia(nombre = "Objetos III", credito = 0)
-	const trabajoFinal = new Materia(nombre = "Trabajo Final", credito = 0)
-	const basesDeDatos = new Materia(nombre = "Base de datos", credito = 0)
-	const quimica = new Materia(nombre = "Quimica", credito = 0)
-	const biologiaI = new Materia(nombre = "Biologia I", credito = 0)
-	const biologiaII = new Materia(nombre = "Biologia II", credito = 0)
-	const anatomiaGeneral = new Materia(nombre = "Anatomia General", credito = 0)
-	const latin = new Materia(nombre = "Latin", credito = 0)
-	const derechoRomano = new Materia(nombre = "Derecho Romano", credito = 0)
-	const historiadelDerechoArgentino = new Materia(nombre = "Historia del Derecho Argentino", credito = 0)
-	const derechoPenalI = new Materia(nombre = "Derecho Penal I", credito = 0)
-	const derechoPenalII = new Materia(nombre = "Derecho Penal II", credito = 0)
+	const matematicaI = new Materia(nombre = "Matematica I", credito = 0, cupo = 5)
+	const objetosI = new Materia(nombre = "Objetos I", credito = 0, cupo = 5)
+	const objetosII = new Materia(nombre = "Objetos II", credito = 0, cupo = 3)
+	const objetosIII = new Materia(nombre = "Objetos III", credito = 0, cupo = 5)
+	const trabajoFinal = new Materia(nombre = "Trabajo Final", credito = 0, cupo = 5)
+	const basesDeDatos = new Materia(nombre = "Base de datos", credito = 0, cupo = 5)
+	const programacionConcurrente = new Materia(nombre = "Programacion Concurrente", credito = 0, cupo = 5)
+	const quimica = new Materia(nombre = "Quimica", credito = 0, cupo = 5)
+	const biologiaI = new Materia(nombre = "Biologia I", credito = 0, cupo = 5)
+	const biologiaII = new Materia(nombre = "Biologia II", credito = 0, cupo = 5)
+	const anatomiaGeneral = new Materia(nombre = "Anatomia General", credito = 0, cupo = 5)
+	const latin = new Materia(nombre = "Latin", credito = 0, cupo = 5)
+	const derechoRomano = new Materia(nombre = "Derecho Romano", credito = 0, cupo = 5)
+	const historiadelDerechoArgentino = new Materia(nombre = "Historia del Derecho Argentino", credito = 0, cupo = 5)
+	const derechoPenalI = new Materia(nombre = "Derecho Penal I", credito = 0, cupo = 5)
+	const derechoPenalII = new Materia(nombre = "Derecho Penal II", credito = 0, cupo = 5)
 	const roque = new Estudiantes()
+	const luisa = new Estudiantes()
+	const romina = new Estudiantes()
+	const alicia = new Estudiantes()
+	
 	
 	fixture{
 		
@@ -44,6 +49,7 @@ describe "Test Inscripcion"{
 	programacion.agregarMateria(objetosIII);
 	programacion.agregarMateria(trabajoFinal);
 	programacion.agregarMateria(basesDeDatos);
+	programacion.agregarMateria(programacionConcurrente);
 	
 	medicina.agregarMateria(quimica);
 	medicina.agregarMateria(biologiaI);
@@ -60,6 +66,37 @@ describe "Test Inscripcion"{
 	roque.inscribirCarrera(medicina);
 	
 	roque.aprobarMateria(elementosDeProgramacion, 10)
+	
+	//REQUISITOS DEL TEST
+	objetosII.agregarCorrlatividades(objetosI)
+	objetosII.agregarCorrlatividades(matematicaI)
+	
+	objetosIII.agregarCorrlatividades(objetosII)
+	objetosIII.agregarCorrlatividades(basesDeDatos)
+	
+	programacionConcurrente.agregarCorrlatividades(basesDeDatos)
+	programacionConcurrente.agregarCorrlatividades(objetosI)
+	
+	biologiaII.agregarCorrlatividades(biologiaI)
+	
+	roque.aprobarMateria(elementosDeProgramacion, 10)
+	roque.aprobarMateria(matematicaI, 10)
+	roque.aprobarMateria(objetosI, 10)
+	roque.aprobarMateria(basesDeDatos, 10)
+	roque.aprobarMateria(quimica, 10)
+	roque.aprobarMateria(biologiaI, 10)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	}

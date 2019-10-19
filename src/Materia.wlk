@@ -7,7 +7,7 @@ class Materia {
 	const property EstudiantesInscript = []
 	const EstudianteListaEspera =  []
 	
-	var property cupo = 30;
+	var property cupo;
 	const listaEsperaAlumnos = []
 	
 	
