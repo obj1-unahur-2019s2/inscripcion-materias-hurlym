@@ -37,7 +37,7 @@ class Estudiantes {
 		
 	}
 	
-	method inscribirMateria(materia){
+	method condicionesMateria(materia){
 		//VER COMO SE SABE SI LA MATERIA QUE SE DESEA AGREGAR PERTENECE A LA CARRERA A LA QUE
 		//ESTA INSCRIPTO
 		
@@ -73,26 +73,29 @@ class Estudiantes {
 	method darDeBaja(materia)
 	{
 		//ELIMINO LA MATERIA DE LA LISTA DE MATERIAS INSCRIPTAS
-		materiasInscriptas.remove(materia)
+		materia.EstudiantesInscript().remove(self)
+		
 		//CONSULTO SI HAY LISTA DE ESPERA
 		if(materia.verListaDeEspera().size()>0){
 			//SI HAY LISTA DE ESPERA BUSCO EL PRIMER ALUMNO DE LA LISTA Y LE AGREGO LA MATRIA A 
 			//SU LISTA DE MATERIAS INSCRIPTAS
 			//PERO COMO SE HACE
-			materia.verListaDeEspera().get(0).agregarMateria(materia)
+			materia.pasarListaEsperaAInscripto()
+			//
 		}
 	}
 	
 	//AGREGO LA MATERIA A MATERIAS INSCRIPTAS
-	method agregarMateria(materia)
+	method inscribirMateria(materia)
 	{
-		if(self.inscribirMateria(materia))
+		if(not self.condicionesMateria(materia))
 		{
-			materiasInscriptas.add(materia)
+			self.error("No se puede inscribir en la materia")
 		}
 		else
 		{
-			self.error("No se puede inscribir en la materia")
+			
+			materia.anotar().add(self)
 		}
 	}
 	
@@ -101,7 +104,7 @@ class Estudiantes {
 		if(cursadas.contains(mate))
 		{
 			//ACA DEBERIA IR EL MENSAJE DE ERROR
-			
+			self.error("La materia esta aprobada")
 		}
 		else
 		{
@@ -115,7 +118,39 @@ class Estudiantes {
 		
 	}
 	
+	method materiasInscriptas()
+	{
+		const materiasAnotado = []
+		self.listarMateriasCarreras().filter({mate=>self.estaAnotadoEnMateria(mate)})
+		
+		return materiasAnotado
+		
+	}
+	
+	method materiasListaEspera()
+	{
+		const materiasListaEspera = []
+		self.listarMateriasCarreras().filter({mate=>mate.estaListaEspera(self)})
+		
+		
+		return materiasListaEspera
+		
+	}
+	
+	
+	method listarMateriasCarreras()
+	{
+		const todasLasMateriasCarreras = []
+		carrerasInscriptas.foreach(({carre=>todasLasMateriasCarreras.addAll(carre.materias())}))
+		return todasLasMateriasCarreras
+	}
+		
+	
+	
+	
 	method estaAnotado(materia){
+		
+		
 		//CONSULTO LA CANTIDAD DE MATERIAS APROBADAS
 		return(materiasInscriptas.contains(materia))
 			
@@ -139,6 +174,33 @@ class Estudiantes {
 			
 		
 	}
+	
+	//PUNTO 9 SABER TODAS LAS MATERIAS DE UNA CARRERA A LA QUE SE PUEDE INSCRIBIR UN ESTUDIANTE QUE ESTA INSCRIPTO
+	method estaInscriptoCarrera(carrera){
+		//CONSULTO SI LA CARRERA EXISTE EN LAS INSCRIPCION DE CARRERAS
+		return(carrerasInscriptas.contains(carrera))
+		
+	}
+	
+	//CONSULTO SI EL ESTUDIANTE SE ENCUENTRA ANOTADO EN LISTA DE ESPERA EN LA MATERIA
+	method estaAnotadoEnMateria(mate){
+		return(mate.estaListaEspera(self) or mate.estaAnotado(self))
+	}
+	
+	method mateiasRestaAnotar(carrera){
+		if (not self.estaInscriptoCarrera(carrera)){
+			self.error("El estudiante no esta inscripto en la carrera")
+			return false
+		}
+		else{
+			//NO SE SI SE PUEDE HACER QUE SE CUMPLA UNA CONDICION NEGADA
+			return(carrera.materias().filter({mate=>not self.estaAnotadoEnMateria(mate)}))
+		}
+	}
+	
+	
+	
+	
 	
 	
 	

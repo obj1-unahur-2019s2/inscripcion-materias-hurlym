@@ -5,7 +5,7 @@ class Carrera {
 	
 	
 	
-	const materias = []
+	const property materias = []
 	
 	method agregarMateria(materia){
 		materias.add(materia)
